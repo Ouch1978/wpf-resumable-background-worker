@@ -1,0 +1,246 @@
+﻿<Window
+    x:Class="ResumableBackgroundWorker.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    Background="{x:Null}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" />
+    </WindowChrome.WindowChrome>
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Grid x:Name="LayoutRoot">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border
+                    x:Name="bdrWindowTitle"
+                    Margin="0,10,0,0"
+                    Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="2,2,2,0"
+                    CornerRadius="10,10,0,0"
+                    MouseLeftButtonDown="bdrWindowTitle_MouseLeftButtonDown">
+                    <Grid x:Name="grdTitleContent" Margin="10,10,10,0">
+                        <StackPanel
+                            x:Name="stkTitle"
+                            Margin="0,-20,0,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Horizontal"
+                            d:LayoutOverrides="Height">
+                            <TextBlock
+                                x:Name="textBlock"
+                                Margin="0,-20,0,-5"
+                                VerticalAlignment="Bottom"
+                                FontFamily="Arial Black"
+                                FontSize="48"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Text="R"
+                                TextWrapping="Wrap"
+                                d:LayoutOverrides="Width">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="2"
+                                        Opacity="0.5"
+                                        ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock
+                                VerticalAlignment="Bottom"
+                                FontFamily="Arial Black"
+                                FontSize="26.667"
+                                FontWeight="Bold"
+                                Text="esumable BackgroundWorker"
+                                TextWrapping="Wrap">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="2"
+                                        Opacity="0.5"
+                                        ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel
+                            x:Name="stkButtonBar"
+                            Margin="0,-11,0,5"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                            <Button
+                                x:Name="btnMinimize"
+                                Width="32"
+                                Margin="0,0,0,0"
+                                Click="btnMinimize_Click"
+                                Content="🗕︎" />
+                            <Button
+                                x:Name="btnMaximize"
+                                Width="32"
+                                Margin="2,0,0,0"
+                                Click="btnMaximize_Click"
+                                Content="🗖︎" />
+                            <Button
+                                x:Name="btnClose"
+                                Width="32"
+                                Margin="2,0,0,0"
+                                Click="btnClose_Click"
+                                Content="🗙︎" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border
+                    x:Name="bdrWindowContent"
+                    Grid.Row="1"
+                    Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="2,0,2,2"
+                    CornerRadius="0,0,10,10">
+                    <ContentPresenter Margin="12" ClipToBounds="True" />
+                </Border>
+                <Thumb
+                    x:Name="thumbTop"
+                    Grid.RowSpan="2"
+                    Height="5"
+                    Margin="15,10,15,0"
+                    VerticalAlignment="Top"
+                    Background="Red"
+                    Cursor="SizeNS"
+                    Opacity="0"
+                    PreviewMouseLeftButtonDown="thumb_PreviewMouseLeftButtonDown" />
+                <Thumb
+                    x:Name="thumbTopRight"
+                    Grid.RowSpan="2"
+                    Width="15"
+                    Height="15"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Background="Green"
+                    Cursor="SizeNESW"
+                    Opacity="0"
+                    PreviewMouseLeftButtonDown="thumb_PreviewMouseLeftButtonDown" />
+                <Thumb
+                    x:Name="thumbRight"
+                    Grid.RowSpan="2"
+                    Width="5"
+                    Margin="0,25,0,15"
+                    HorizontalAlignment="Right"
+                    Background="Red"
+                    Cursor="SizeWE"
+                    Opacity="0"
+                    PreviewMouseLeftButtonDown="thumb_PreviewMouseLeftButtonDown" />
+                <Thumb
+                    x:Name="thumbBottomRight"
+                    Grid.RowSpan="2"
+                    Width="15"
+                    Height="15"
+                    Margin="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Background="Green"
+                    Cursor="SizeNWSE"
+                    Opacity="0"
+                    PreviewMouseLeftButtonDown="thumb_PreviewMouseLeftButtonDown" />
+                <Thumb
+                    x:Name="thumbBottom"
+                    Grid.RowSpan="2"
+                    Height="5"
+                    Margin="15,0"
+                    VerticalAlignment="Bottom"
+                    Background="Red"
+                    Cursor="SizeNS"
+                    Opacity="0"
+                    PreviewMouseLeftButtonDown="thumb_PreviewMouseLeftButtonDown" />
+                <Thumb
+                    x:Name="thumbBottomLeft"
+                    Grid.RowSpan="2"
+                    Width="15"
+                    Height="15"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Background="Green"
+                    Cursor="SizeNESW"
+                    Opacity="0"
+                    PreviewMouseLeftButtonDown="thumb_PreviewMouseLeftButtonDown" />
+                <Thumb
+                    x:Name="thumbLeft"
+                    Grid.RowSpan="2"
+                    Width="5"
+                    Margin="0,25,0,15"
+                    HorizontalAlignment="Left"
+                    Background="Red"
+                    Cursor="SizeWE"
+                    Opacity="0"
+                    PreviewMouseLeftButtonDown="thumb_PreviewMouseLeftButtonDown" />
+                <Thumb
+                    x:Name="thumbTopLeft"
+                    Grid.RowSpan="2"
+                    Width="15"
+                    Height="15"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="Green"
+                    Cursor="SizeNWSE"
+                    Opacity="0"
+                    PreviewMouseLeftButtonDown="thumb_PreviewMouseLeftButtonDown" />
+            </Grid>
+        </ControlTemplate>
+    </Window.Template>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Viewbox >
+            <TextBlock x:Name="txtMessage" FontFamily="Cascadia Mono" Text="         "></TextBlock>
+        </Viewbox>
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <ToggleButton
+                x:Name="tglPauseResume"
+                Width="48"
+                Margin="8,0,0,0"
+                Checked="tglPauseResume_Checked"
+                Unchecked="tglPauseResume_Unchecked">
+                <ToggleButton.Style>
+                    <Style TargetType="ToggleButton">
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="Green" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Foreground" Value="DimGray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+                <Canvas Width="24" Height="24">
+                    <Path Data="M8,5.14V19.14L19,12.14L8,5.14Z" Fill="{Binding Foreground, ElementName=tglPauseResume}" />
+                </Canvas>
+            </ToggleButton>
+
+            <Button
+                x:Name="btnStop"
+                Width="48"
+                Margin="8,0,0,0"
+                Click="btnStop_Click"
+                Foreground="Black">
+                <Canvas Width="24" Height="24">
+                    <Path Data="M18,18H6V6H18V18Z" Fill="{Binding Foreground, ElementName=btnStop}" />
+                </Canvas>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
