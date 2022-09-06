@@ -6,7 +6,7 @@ namespace ResumableBackgroundWorker
 {
     public partial class MainWindow : Window
     {
-        private BackgroundWorker _myWorker = new BackgroundWorker
+        private readonly BackgroundWorker _myWorker = new BackgroundWorker
         {
             WorkerReportsProgress = true,
             WorkerSupportsCancellation = true
@@ -15,9 +15,9 @@ namespace ResumableBackgroundWorker
 
         // 透過 ManualResetEvent 來手動封鎖或是釋放執行緖。
         // 它在被建立起來的時候會處已受信 (signaled) 狀態。
-        private ManualResetEvent _manualReset = new ManualResetEvent(true);
+        private readonly ManualResetEvent _manualReset = new ManualResetEvent(true);
 
-        private int _totalCount = 999;
+        private readonly int _totalCount = 999;
 
         public MainWindow()
         {
@@ -30,7 +30,7 @@ namespace ResumableBackgroundWorker
 
         private void _myWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            for (int i = 0; i < _totalCount; ++i)
+            for (var i = 0; i < _totalCount; ++i)
             {
                 if (_myWorker.CancellationPending)
                 {
