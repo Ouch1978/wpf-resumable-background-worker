@@ -17,7 +17,7 @@ namespace ResumableBackgroundWorker
         // 它在被建立起來的時候會處已受信 (signaled) 狀態。
         private ManualResetEvent _manualReset = new ManualResetEvent(true);
 
-        private int _totalCount = 99999;
+        private int _totalCount = 999;
 
         public MainWindow()
         {
@@ -30,7 +30,7 @@ namespace ResumableBackgroundWorker
 
         private void _myWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            for (int i = 0; i < _totalCount; i++)
+            for (int i = 0; i < _totalCount; ++i)
             {
                 if (_myWorker.CancellationPending)
                 {
@@ -44,7 +44,7 @@ namespace ResumableBackgroundWorker
 
                 Thread.Sleep(1);
 
-                _myWorker.ReportProgress(++i);
+                _myWorker.ReportProgress(i + 1);
 
             }
         }
