@@ -37,9 +37,9 @@ namespace ResumableBackgroundWorker
 
                 _manualReset.WaitOne();
 
-                Thread.Sleep(20);
+                Thread.Sleep(1);
 
-                _myWorker.ReportProgress(i++);
+                _myWorker.ReportProgress(++i);
 
             }
         }
