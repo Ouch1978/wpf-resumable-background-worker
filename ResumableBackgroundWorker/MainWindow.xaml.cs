@@ -39,7 +39,7 @@ namespace ResumableBackgroundWorker
                 }
 
 
-                //當 ManualResetEvent 的狀態為未受信 (unsignaled) 狀態時會阻塞執行緒。
+                //當 ManualResetEvent 的狀態為未受信 (non-signaled) 狀態時會阻塞執行緒。
                 _manualReset.WaitOne();
 
                 Thread.Sleep(1);
@@ -74,7 +74,7 @@ namespace ResumableBackgroundWorker
 
         private void tglPauseResume_Unchecked(object sender, RoutedEventArgs e)
         {
-            //將 ManualResetEvent 的狀態切換為未受信 (unsignaled) 狀態，讓它在呼叫 WaitOne() 方法時阻擋執行緒繼續執行。
+            //將 ManualResetEvent 的狀態切換為未受信 (non-signaled) 狀態，讓它在呼叫 WaitOne() 方法時阻擋執行緒繼續執行。
             _manualReset.Reset();
         }
 

@@ -201,8 +201,11 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Viewbox >
-            <TextBlock x:Name="txtMessage" FontFamily="Cascadia Mono" Text="         "></TextBlock>
+        <Viewbox>
+            <TextBlock
+                x:Name="txtMessage"
+                FontFamily="Cascadia Mono"
+                Text="         " />
         </Viewbox>
         <StackPanel
             Grid.Row="1"
