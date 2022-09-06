@@ -12,9 +12,12 @@ namespace ResumableBackgroundWorker
             WorkerSupportsCancellation = true
         };
 
+
+        // 透過 ManualResetEvent 來手動封鎖或是釋放執行緖。
+        // 它在被建立起來的時候會處已受信 (signaled) 狀態。
         private ManualResetEvent _manualReset = new ManualResetEvent(true);
 
-        private int _totalCount = 9999;
+        private int _totalCount = 99999;
 
         public MainWindow()
         {
@@ -35,6 +38,8 @@ namespace ResumableBackgroundWorker
                     return;
                 }
 
+
+                //當 ManualResetEvent 的狀態為未受信 (unsignaled) 狀態時會阻塞執行緒。
                 _manualReset.WaitOne();
 
                 Thread.Sleep(1);
@@ -62,12 +67,14 @@ namespace ResumableBackgroundWorker
             }
             else
             {
+                //將 ManualResetEvent 的狀態切換為已受信 (signaled) 狀態，讓它在呼叫 WaitOne() 方法時讓執行緒繼續執行。
                 _manualReset.Set();
             }
         }
 
         private void tglPauseResume_Unchecked(object sender, RoutedEventArgs e)
         {
+            //將 ManualResetEvent 的狀態切換為未受信 (unsignaled) 狀態，讓它在呼叫 WaitOne() 方法時阻擋執行緒繼續執行。
             _manualReset.Reset();
         }
 
