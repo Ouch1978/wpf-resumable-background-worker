@@ -14,7 +14,7 @@ namespace ResumableBackgroundWorker
 
 
         // 透過 ManualResetEvent 來手動封鎖或是釋放執行緖。
-        // 它在被建立起來的時候會處已受信 (signaled) 狀態。
+        // 並且透過建構子讓它在被建立起來的時候處於已受信 (signaled) 狀態。
         private readonly ManualResetEvent _manualReset = new ManualResetEvent(true);
 
         private readonly int _totalCount = 999;
